@@ -15,13 +15,14 @@ public class KeycloakHelper {
                 .build();
     }
 
-    public Object
+    public String
 
     createUser(User user) throws IOException {
         var accessToken = this.getAdminAccessToken().access_token;
+        System.out.println("Access Token = " + accessToken);
 
         var mediaType = MediaType.parse("application/json");
-        var body = RequestBody.create(mediaType, "{\"firstName\":\"Sergey\",\"lastName\":\"Kargopolov\", \"enabled\":\"true\", \"username\":\"" + user.getUsername() + "\", \"credentials\":[{\"type\":\"password\",\"value\":\"" + user.getPassword() + "\",\"temporary\":false}]}");
+        var body = RequestBody.create(mediaType, "{\"firstName\":\"Sergey\",\"lastName\":\"Kargopolov\", \"email\":\"" + user.getEmail() + "\", \"enabled\":\"true\", \"username\":\"" + user.getUsername() + "\", \"credentials\":[{\"type\":\"password\",\"value\":\"" + user.getPassword() + "\",\"temporary\":false}]}");
         var request = new Request.Builder()
                 .url("https://keycloak.jiwai.win/auth/admin/realms/UniHeart/users")
                 .method("POST", body)
@@ -29,12 +30,17 @@ public class KeycloakHelper {
                 .addHeader("Authorization", "Bearer " + accessToken)
                 .build();
         var response = client.newCall(request).execute();
-        return JsonHelper.parse(response.toString());
+        return response.toString();
     }
 
     public KeycloakAccessToken getAdminAccessToken() throws IOException {
+        var username = System.getenv("KC_ADMIN");
+        var password = System.getenv("KC_PASSWORD");
+
+        System.out.println("username = " + username + "; password = " + password);
+
         var mediaType = MediaType.parse("application/x-www-form-urlencoded");
-        var body = RequestBody.create(mediaType, "username=" + System.getenv("KC_ADMIN") + "&password=" + System.getenv("KC_PASSWORD") + "&grant_type=password&client_id=admin-cli");
+        var body = RequestBody.create(mediaType, "username=" + username + "&password=" + password + "&grant_type=password&client_id=admin-cli");
         var request = new Request.Builder()
                 .url("https://keycloak.jiwai.win/auth/realms/master/protocol/openid-connect/token")
                 .method("POST", body)
