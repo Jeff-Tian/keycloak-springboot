@@ -19,7 +19,7 @@ public class DemoApplication {
         return "Hello Keycloak!";
     }
 
-    @RequestMapping("/visitor")
+    @RequestMapping(value = "/visitor", method = RequestMethod.GET)
     @ResponseBody
     public String getVisitorPath() {
         return "嗨，你好！当你看到这些文字，说明你成功登录了！";
