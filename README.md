@@ -52,6 +52,27 @@ Admin 的用户名和密码。它们不能明文放在代码里，因此采用�
 
 代码详见： `KeycloakHelper.getAdminAccessToken()`
 
+## Keycloak 配置
+要接入 Keycloak，需要在 Keycloak 的相关领域下创建客户端。
+比如对于本示例应用，可以在 Keycloak 里创建一个 demoapp 
+的客户端，如下图所示：
+
+### 命名并保存
+
+![](./screenshots/image.png)
+
+### 配置回调域名
+
+可以配置多个，并且支持通配符。
+
+![](./screenshots/image%20(1).png)
+
+### 配置一个角色
+
+配合代码配置，可以做到只有该角色的用户才能访问被保护页面。 
+
+![](./screenshots/image%20(2).png)
+
 ## 视频讲解
 
 - https://www.zhihu.com/zvideo/1486055107167514624
