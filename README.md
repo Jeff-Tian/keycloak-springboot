@@ -30,7 +30,7 @@ open http://localhost:8080/visitor
 ```shell
 git clone https://github.com/Jeff-Tian/keycloak-springboot
 cd keycloak-springboot
-mvn clean install
+mvnw clean install
 mvnw spring-boot:run -f pom.xml
 
 start http://localhost:8080
