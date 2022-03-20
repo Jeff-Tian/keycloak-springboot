@@ -1,6 +1,6 @@
 package com.example.keycloakspringboot.models;
 
-public class KeycloakAccessToken {
+public class KeycloakAccessTokenPayload {
     public String access_token;
     public int expires_in;
     public int refresh_expires_in;

@@ -1,6 +1,6 @@
 package com.example.keycloakspringboot;
 
-import com.example.keycloakspringboot.models.User;
+import com.example.keycloakspringboot.models.UserPayload;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
@@ -27,10 +27,15 @@ public class DemoApplication {
 
     @PostMapping(value = "/create-user", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
-    public String createVisitor(@RequestBody User newUser) throws IOException {
+    public String createVisitor(@RequestBody UserPayload newUser) throws IOException {
         return "visitor created result = " + new KeycloakHelper().createUser(newUser);
     }
 
+    @PostMapping(value = "/assign-role", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ResponseBody
+    public String assignRole(@RequestBody String userId) {
+        return "assigned " + new KeycloakHelper().assignRole(userId);
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);

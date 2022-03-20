@@ -1,6 +1,6 @@
 package com.example.keycloakspringboot.models;
 
-public class User {
+public class UserPayload {
     private String username;
     private String password;
     private String email;

@@ -1,6 +1,6 @@
 package com.example.keycloakspringboot;
 
-import com.example.keycloakspringboot.models.KeycloakAccessToken;
+import com.example.keycloakspringboot.models.KeycloakAccessTokenPayload;
 import com.example.keycloakspringboot.models.User;
 import okhttp3.*;
 
@@ -15,11 +15,8 @@ public class KeycloakHelper {
                 .build();
     }
 
-    public String
-
-    createUser(User user) throws IOException {
+    public String createUser(User user) throws IOException {
         var accessToken = this.getAdminAccessToken().access_token;
-        System.out.println("Access Token = " + accessToken);
 
         var mediaType = MediaType.parse("application/json");
         var body = RequestBody.create(mediaType, "{\"firstName\":\"Sergey\",\"lastName\":\"Kargopolov\", \"email\":\"" + user.getEmail() + "\", \"enabled\":\"true\", \"username\":\"" + user.getUsername() + "\", \"credentials\":[{\"type\":\"password\",\"value\":\"" + user.getPassword() + "\",\"temporary\":false}]}");
@@ -29,11 +26,30 @@ public class KeycloakHelper {
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", "Bearer " + accessToken)
                 .build();
-        var response = client.newCall(request).execute();
-        return response.toString();
+        var createUserResponse = client.newCall(request).execute();
+        return createUserResponse.toString();
     }
 
-    public KeycloakAccessToken getAdminAccessToken() throws IOException {
+    public String assignRole(String userId) {
+        var accessToken = this.getAdminAccessToken().access_token;
+        var mediaType = MediaType.parse("application/json");
+
+        var clientId = "98ea8f07-a7f2-4607-ab56-b5208a90eaa1";
+
+        var body = RequestBody.create(mediaType, "[{\"id\": \"bef4bf69-371b-460a-8a0c-b2943da1983b\"," +
+                "\"name\":\"visitor\",\"description\":\"add roles programatically\",\"composite\":false," +
+                "\"clientRole\":true,\"containerId\":\"" + clientId + "\"}]");
+
+        var request =
+                new Request.Buidler().url("https://keycloak.jiwai.win/auth/admin/realms/UniHeart/users/" + userId +
+                                "/role-mappings/clients/" + clientId).method("POST", body)
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Authorization", "Bearer " + accessToken)
+                        .build();
+        return (client.newCall(request).execute()).toString();
+    }
+
+    public KeycloakAccessTokenPayload getAdminAccessToken() throws IOException {
         var username = System.getenv("KC_ADMIN");
         var password = System.getenv("KC_PASSWORD");
 
