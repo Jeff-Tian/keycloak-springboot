@@ -1,7 +1,7 @@
 package com.example.keycloakspringboot;
 
 import com.example.keycloakspringboot.models.KeycloakAccessTokenPayload;
-import com.example.keycloakspringboot.models.User;
+import com.example.keycloakspringboot.models.UserPayload;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class KeycloakHelper {
                 .build();
     }
 
-    public String createUser(User user) throws IOException {
+    public String createUser(UserPayload user) throws IOException {
         var accessToken = this.getAdminAccessToken().access_token;
 
         var mediaType = MediaType.parse("application/json");

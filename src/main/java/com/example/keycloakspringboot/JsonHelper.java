@@ -1,6 +1,6 @@
 package com.example.keycloakspringboot;
 
-import com.example.keycloakspringboot.models.KeycloakAccessToken;
+import com.example.keycloakspringboot.models.KeycloakAccessTokenPayload;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -22,7 +22,7 @@ public class JsonHelper {
         return gson.fromJson(s, Object.class);
     }
 
-    public static KeycloakAccessToken parseFrom(String s) {
-        return gson.fromJson(s, KeycloakAccessToken.class);
+    public static KeycloakAccessTokenPayload parseFrom(String s) {
+        return gson.fromJson(s, KeycloakAccessTokenPayload.class);
     }
 }
