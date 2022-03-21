@@ -37,6 +37,35 @@ start http://localhost:8080
 start http://localhost:8080/visitor
 ```
 
+### 本地运行排障指南
+
+#### Windows 10 上 mvnw clean install 报错：
+
+```
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project keycloak-springboot: Compilation failure
+[ERROR] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?
+```
+
+**Solution**
+1. 安装 jabba 
+   1. 由于 jabba 官网提供的方式，在网络不好时，不可行。所以需要一些变通。 
+   2. 从 GitHub 上下载 jabba 可执行文件到本地，然后在本地相同目录中运行： 
+      ```shell
+      python3 -m http.server
+      ```
+   3.  如果是 Windows 10，在 Powershell 中运行： 
+       ```powershell
+       [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+       Invoke-Expression (
+         Invoke-WebRequest https://jiy.coding.net/p/jabba/d/jabba/git/raw/master/install.ps1?download=false -UseBasicParsing
+       ).Content
+       ```
+2. 安装 jdk 13
+   ```
+   jabba install openjdk@1.13.0-2
+   ```
+3. 解决
+
 ## 环境变量
 
 在自动化创建用户时，使用了 Keycloak Admin 接口，

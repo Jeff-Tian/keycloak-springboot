@@ -1,6 +1,7 @@
 package com.example.keycloakspringboot;
 
 import com.example.keycloakspringboot.models.UserPayload;
+import okhttp3.OkHttpClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
@@ -28,13 +29,15 @@ public class DemoApplication {
     @PostMapping(value = "/create-user", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String createVisitor(@RequestBody UserPayload newUser) throws IOException {
-        return "visitor created result = " + new KeycloakHelper().createUser(newUser);
+        return "visitor created result = " + new KeycloakHelper(new OkHttpClient().newBuilder()
+                .build()).createUser(newUser);
     }
 
     @PostMapping(value = "/assign-role", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
-    public String assignRole(@RequestBody String userId) {
-        return "assigned " + new KeycloakHelper().assignRole(userId);
+    public String assignRole(@RequestBody String userId) throws IOException {
+        return "assigned " + new KeycloakHelper(new OkHttpClient().newBuilder()
+                .build()).assignRole(userId);
     }
 
     public static void main(String[] args) {

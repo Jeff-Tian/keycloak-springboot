@@ -11,12 +11,11 @@ import java.util.Objects;
 public class KeycloakHelper {
     private final OkHttpClient client;
 
-    public KeycloakHelper() {
-        this.client = new OkHttpClient().newBuilder()
-                .build();
+    public KeycloakHelper(OkHttpClient httpClient) {
+        this.client = httpClient;
     }
 
-    public Response jsonRequest(String url, String payload) {
+    public Response jsonRequest(String url, String payload) throws IOException {
         var mediaType = MediaType.parse("application/json");
         var body = RequestBody.create(mediaType, payload);
         var request = new Request.Builder().url(url).method("POST", body).addHeader("Content-Type", "application/json").addHeader("Authorization", getAdminAccessToken().access_token).build();
@@ -29,7 +28,7 @@ public class KeycloakHelper {
         return this.jsonRequest(url, payload).toString();
     }
 
-    public String assignRole(String userId) {
+    public String assignRole(String userId) throws IOException {
         var clientId = "98ea8f07-a7f2-4607-ab56-b5208a90eaa1";
         var url = java.lang.String.format("https://keycloak.jiwai.win/auth/admin/realms/UniHeart/users/%s/role-mappings/clients/%s", userId, clientId);
         var payload = "[{\"id\": \"bef4bf69-371b-460a-8a0c-b2943da1983b\"," +
