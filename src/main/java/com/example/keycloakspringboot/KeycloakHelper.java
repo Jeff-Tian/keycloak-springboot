@@ -31,9 +31,7 @@ public class KeycloakHelper {
     public String assignRole(String userId) throws IOException {
         var clientId = "98ea8f07-a7f2-4607-ab56-b5208a90eaa1";
         var url = java.lang.String.format("https://keycloak.jiwai.win/auth/admin/realms/UniHeart/users/%s/role-mappings/clients/%s", userId, clientId);
-        var payload = "[{\"id\": \"bef4bf69-371b-460a-8a0c-b2943da1983b\"," +
-                "\"name\":\"visitor\",\"description\":\"add roles programatically\",\"composite\":false," +
-                "\"clientRole\":true,\"containerId\":\"" + clientId + "\"}]";
+        var payload = java.lang.String.format("[{\"id\": \"bef4bf69-371b-460a-8a0c-b2943da1983b\",\"name\":\"visitor\",\"description\":\"add roles programatically\",\"composite\":false,\"clientRole\":true,\"containerId\":\"%s\"}]", clientId);
         return this.jsonRequest(url, payload).toString();
     }
 

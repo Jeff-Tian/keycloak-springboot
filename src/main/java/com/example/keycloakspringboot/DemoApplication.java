@@ -36,8 +36,8 @@ public class DemoApplication {
     @PostMapping(value = "/assign-role", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String assignRole(@RequestBody String userId) throws IOException {
-        return "assigned " + new KeycloakHelper(new OkHttpClient().newBuilder()
-                .build()).assignRole(userId);
+        return java.lang.String.format("assigned %s = %s", userId, new KeycloakHelper(new OkHttpClient().newBuilder()
+                .build()).assignRole(userId));
     }
 
     public static void main(String[] args) {
