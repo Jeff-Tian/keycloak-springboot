@@ -48,12 +48,13 @@ start http://localhost:8080/visitor
 
 **Solution**
 1. 安装 jabba 
-   1. 由于 jabba 官网提供的方式，在网络不好时，不可行。所以需要一些变通。 
-   2. 从 GitHub 上下载 jabba 可执行文件到本地，然后在本地相同目录中运行： 
+   1. 直接 `scoop install jabba` 或者使用官网提供的方式。
+   2. 由于 jabba 官网提供的方式，在网络不好时，不可行。所以需要一些变通。 
+   3. 从 GitHub 上下载 jabba 可执行文件到本地，然后在本地相同目录中运行： 
       ```shell
       python3 -m http.server
       ```
-   3.  如果是 Windows 10，在 Powershell 中运行： 
+   4. 如果是 Windows 10，在 Powershell 中运行： 
        ```powershell
        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
        Invoke-Expression (

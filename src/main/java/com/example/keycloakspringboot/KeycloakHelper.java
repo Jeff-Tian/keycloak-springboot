@@ -19,7 +19,11 @@ public class KeycloakHelper {
         var mediaType = MediaType.parse("application/json");
         var body = RequestBody.create(mediaType, payload);
         var request = new Request.Builder().url(url).method("POST", body).addHeader("Content-Type", "application/json").addHeader("Authorization", getAdminAccessToken().access_token).build();
-        return client.newCall(request).execute();
+        var res = client.newCall(request).execute();
+
+        System.out.println(java.lang.String.format("jsonRequest response = %s", res.toString()));
+
+        return res;
     }
 
     public String createUser(UserPayload user) throws IOException {
@@ -32,6 +36,9 @@ public class KeycloakHelper {
         var clientId = "98ea8f07-a7f2-4607-ab56-b5208a90eaa1";
         var url = java.lang.String.format("https://keycloak.jiwai.win/auth/admin/realms/UniHeart/users/%s/role-mappings/clients/%s", userId, clientId);
         var payload = java.lang.String.format("[{\"id\": \"bef4bf69-371b-460a-8a0c-b2943da1983b\",\"name\":\"visitor\",\"description\":\"add roles programatically\",\"composite\":false,\"clientRole\":true,\"containerId\":\"%s\"}]", clientId);
+
+        System.out.println(java.lang.String.format("payload = %s", payload));
+
         return this.jsonRequest(url, payload).toString();
     }
 
@@ -51,6 +58,8 @@ public class KeycloakHelper {
         var response = client.newCall(request).execute();
 
         var s = Objects.requireNonNull(response.body()).string();
+
+        System.out.println(java.lang.String.format("token response = %s", s));
 
         return JsonHelper.parseFrom(s);
     }
