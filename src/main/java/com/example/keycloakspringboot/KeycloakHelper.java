@@ -70,7 +70,7 @@ public class KeycloakHelper {
         var clientId = "98ea8f07-a7f2-4607-ab56-b5208a90eaa1";
         var url = java.lang.String.format("https://keycloak.jiwai.win/auth/admin/realms/UniHeart/users/%s/role" +
                 "-mappings/realm", userId);
-        var payload = java.lang.String.format("[{\"id\": \"bef4bf69-371b-460a-8a0c-b2943da1983b\"," +
+        var payload = java.lang.String.format("[{\"id\": \"5e47a34a-5c22-457f-af3f-e5dea7b06839\"," +
                 "\"name\":\"Offline_access\",\"description\":\"add roles programatically\",\"composite\":false," +
                 "\"clientRole\":false,\"containerId\":\"%s\"}]", clientId);
 
