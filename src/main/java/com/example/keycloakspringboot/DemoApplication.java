@@ -42,6 +42,13 @@ public class DemoApplication {
                         .build()).assignRole(payload.getUserId()));
     }
 
+    @PostMapping(value = "/assign-realm-role", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ResponseBody
+    public String assignRealmRole(@RequestBody AssigningRolePayload payload) throws IOException {
+        return java.lang.String.format("assigned %s = %s", payload.getUserId(),
+                new KeycloakHelper(new OkHttpClient().newBuilder().build()).assignRealmRole(payload.getUserId()));
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }

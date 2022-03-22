@@ -64,4 +64,17 @@ public class KeycloakHelper {
 
         return JsonHelper.parseFrom(s);
     }
+
+    public java.lang.String assignRealmRole(String userId) {
+        System.out.println(java.lang.String.format("assigning realm role for user = %s", userId));
+        var clientId = "98ea8f07-a7f2-4607-ab56-b5208a90eaa1";
+        var url = java.lang.String.format("https://keycloak.jiwai.win/auth/admin/realms/UniHeart/users/%s/role-mappings/clients/%s", userId, clientId);
+        var payload = java.lang.String.format("[{\"id\": \"bef4bf69-371b-460a-8a0c-b2943da1983b\"," +
+                "\"name\":\"Offline_access\",\"description\":\"add roles programatically\",\"composite\":false," +
+                "\"clientRole\":false,\"containerId\":\"%s\"}]", clientId);
+
+        System.out.println(java.lang.String.format("payload = %s", payload));
+
+        return this.jsonRequest(url, payload).toString();
+    }
 }
