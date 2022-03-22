@@ -18,7 +18,7 @@ public class KeycloakHelper {
     public Response jsonRequest(String url, String payload) throws IOException {
         var mediaType = MediaType.parse("application/json");
         var body = RequestBody.create(mediaType, payload);
-        var request = new Request.Builder().url(url).method("POST", body).addHeader("Content-Type", "application/json").addHeader("Authorization", getAdminAccessToken().access_token).build();
+        var request = new Request.Builder().url(url).method("POST", body).addHeader("Content-Type", "application/json").addHeader("Authorization", java.lang.String.format("Bearer %s", getAdminAccessToken().access_token)).build();
         var res = client.newCall(request).execute();
 
         System.out.println(java.lang.String.format("jsonRequest response = %s", res.toString()));
