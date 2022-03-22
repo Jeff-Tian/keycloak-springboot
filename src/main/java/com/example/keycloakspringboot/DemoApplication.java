@@ -1,5 +1,6 @@
 package com.example.keycloakspringboot;
 
+import com.example.keycloakspringboot.models.AssigningRolePayload;
 import com.example.keycloakspringboot.models.UserPayload;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.SpringApplication;
@@ -35,9 +36,10 @@ public class DemoApplication {
 
     @PostMapping(value = "/assign-role", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
-    public String assignRole(@RequestBody String userId) throws IOException {
-        return java.lang.String.format("assigned %s = %s", userId, new KeycloakHelper(new OkHttpClient().newBuilder()
-                .build()).assignRole(userId));
+    public String assignRole(@RequestBody AssigningRolePayload payload) throws IOException {
+        return java.lang.String.format("assigned %s = %s", payload.getUserId(),
+                new KeycloakHelper(new OkHttpClient().newBuilder()
+                        .build()).assignRole(payload.getUserId()));
     }
 
     public static void main(String[] args) {
