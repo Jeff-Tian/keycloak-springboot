@@ -65,7 +65,7 @@ public class KeycloakHelper {
         return JsonHelper.parseFrom(s);
     }
 
-    public java.lang.String assignRealmRole(String userId) {
+    public java.lang.String assignRealmRole(String userId) throws IOException {
         System.out.println(java.lang.String.format("assigning realm role for user = %s", userId));
         var clientId = "98ea8f07-a7f2-4607-ab56-b5208a90eaa1";
         var url = java.lang.String.format("https://keycloak.jiwai.win/auth/admin/realms/UniHeart/users/%s/role-mappings/clients/%s", userId, clientId);
