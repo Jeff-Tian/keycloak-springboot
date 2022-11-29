@@ -9,4 +9,5 @@ public class KeycloakAccessTokenPayload {
 
     public String session_state;
     public String scope;
+    public String id_token;
 }

@@ -1,6 +1,7 @@
 package com.example.keycloakspringboot;
 
 import com.example.keycloakspringboot.models.AssigningRolePayload;
+import com.example.keycloakspringboot.models.KeycloakAccessTokenPayload;
 import com.example.keycloakspringboot.models.UserPayload;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.SpringApplication;
@@ -47,6 +48,12 @@ public class DemoApplication {
     public String assignRealmRole(@RequestBody AssigningRolePayload payload) throws IOException {
         return java.lang.String.format("assigned %s = %s", payload.getUserId(),
                 new KeycloakHelper(new OkHttpClient().newBuilder().build()).assignRealmRole(payload.getUserId()));
+    }
+
+    @GetMapping(value = "/login-by-username-password")
+    @ResponseBody
+    public KeycloakAccessTokenPayload loginByUserNamePassword(String username, String password) throws IOException {
+        return new KeycloakHelper(new OkHttpClient().newBuilder().build()).getUserTokenByPassword(username, password);
     }
 
     public static void main(String[] args) {

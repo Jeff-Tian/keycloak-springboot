@@ -76,4 +76,20 @@ public class KeycloakHelper {
 
         return this.jsonRequest(url, payload).toString();
     }
+
+    public KeycloakAccessTokenPayload getUserTokenByPassword(String username, String password) throws IOException {
+        var mediaType = MediaType.parse("application/x-www-form-urlencoded");
+        var body = RequestBody.create(mediaType, java.lang.String.format("username=%s&password=%s&grant_type=password&client_id=demoapp&scope=openid", username, password));
+        var request = new Request.Builder()
+                .url("https://keycloak.jiwai.win/auth/realms/UniHeart/protocol/openid-connect/token")
+                .method("POST", body)
+                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                .build();
+
+        var response = client.newCall(request).execute();
+
+        var s = Objects.requireNonNull(response.body()).string();
+
+        return JsonHelper.parseFrom(s);
+    }
 }

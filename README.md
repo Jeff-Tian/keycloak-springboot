@@ -39,7 +39,7 @@ start http://localhost:8080/visitor
 
 ### 本地运行排障指南
 
-#### Windows 10 上 mvnw clean install 报错：
+#### Windows 10 上 `mvnw clean install` 报错：
 
 ```
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project keycloak-springboot: Compilation failure
