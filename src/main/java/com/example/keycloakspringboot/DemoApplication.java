@@ -56,6 +56,12 @@ public class DemoApplication {
         return new KeycloakHelper(new OkHttpClient().newBuilder().build()).getUserTokenByPassword(username, password);
     }
 
+    @GetMapping(value="/login-by-attribute")
+    @ResponseBody
+    public KeycloakAccessTokenPayload loginByAttribute(String attr, String password) throws IOException {
+        return new KeycloakHelper(new OkHttpClient().newBuilder().build()).getUserTokenByAttributeAndPassword(attr, password);
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }

@@ -1,10 +1,12 @@
 package com.example.keycloakspringboot;
 
 import com.example.keycloakspringboot.models.KeycloakAccessTokenPayload;
+import com.example.keycloakspringboot.models.KeycloakUserModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.lang.reflect.Type;
+import java.util.List;
 
 public class JsonHelper {
     private static final Gson gson =
@@ -24,5 +26,9 @@ public class JsonHelper {
 
     public static KeycloakAccessTokenPayload parseFrom(String s) {
         return gson.fromJson(s, KeycloakAccessTokenPayload.class);
+    }
+
+    public static KeycloakUserModel[] parseUsersFrom(String s) {
+        return gson.fromJson(s, KeycloakUserModel[].class);
     }
 }
