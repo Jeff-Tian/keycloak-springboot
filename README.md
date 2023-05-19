@@ -42,6 +42,21 @@ start http://localhost:8080/visitor
 
 ### 本地运行排障指南
 
+#### Mac OSX 上 `mvn clean install` 报错：
+
+```shell
+The JAVA_HOME environment variable is not defined correctly,
+this environment variable is needed to run this program.
+```
+
+**Solution**
+
+运行 `mvn` 时指定 JAVA_HOME 环境变量：
+
+```shell
+JAVA_HOME=/usr/local/opt/openjdk mvn clean install
+```
+
 #### Windows 10 上 `mvnw clean install` 报错：
 
 ```

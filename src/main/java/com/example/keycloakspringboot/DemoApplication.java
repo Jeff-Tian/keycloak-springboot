@@ -28,6 +28,12 @@ public class DemoApplication {
         return "嗨，你好！当你看到这些文字，说明你成功登录了！";
     }
 
+    @RequestMapping(value = "/api/test", method = RequestMethod.GET)
+    @ResponseBody
+    public String testApi() {
+        return "你好，你现在是登录状态了！";
+    }
+
     @PostMapping(value = "/create-user", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
     public String createVisitor(@RequestBody UserPayload newUser) throws IOException {
@@ -56,7 +62,7 @@ public class DemoApplication {
         return new KeycloakHelper(new OkHttpClient().newBuilder().build()).getUserTokenByPassword(username, password);
     }
 
-    @GetMapping(value="/login-by-attribute")
+    @GetMapping(value = "/login-by-attribute")
     @ResponseBody
     public KeycloakAccessTokenPayload loginByAttribute(String attr, String password) throws IOException {
         return new KeycloakHelper(new OkHttpClient().newBuilder().build()).getUserTokenByAttributeAndPassword(attr, password);
