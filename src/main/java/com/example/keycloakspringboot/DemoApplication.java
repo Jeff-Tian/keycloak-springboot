@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller
@@ -25,7 +26,9 @@ public class DemoApplication {
 
     @RequestMapping(value = "/visitor", method = RequestMethod.GET)
     @ResponseBody
-    public String getVisitorPath(KeycloakSecurityContext keycloakSecurityContext) {
+    public String getVisitorPath(HttpServletRequest request) {
+        KeycloakSecurityContext keycloakSecurityContext = (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
+
         return "嗨，你好！当你看到这些文字，说明你成功登录了！ 你的 id_token 是： " + keycloakSecurityContext.getIdTokenString() + " ；你的 access_token 是： " + keycloakSecurityContext.getTokenString();
     }
 
