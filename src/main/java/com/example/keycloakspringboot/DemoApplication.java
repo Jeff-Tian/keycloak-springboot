@@ -4,6 +4,7 @@ import com.example.keycloakspringboot.models.AssigningRolePayload;
 import com.example.keycloakspringboot.models.KeycloakAccessTokenPayload;
 import com.example.keycloakspringboot.models.UserPayload;
 import okhttp3.OkHttpClient;
+import org.keycloak.KeycloakSecurityContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
@@ -24,8 +25,8 @@ public class DemoApplication {
 
     @RequestMapping(value = "/visitor", method = RequestMethod.GET)
     @ResponseBody
-    public String getVisitorPath() {
-        return "嗨，你好！当你看到这些文字，说明你成功登录了！";
+    public String getVisitorPath(KeycloakSecurityContext keycloakSecurityContext) {
+        return "嗨，你好！当你看到这些文字，说明你成功登录了！ 你的 id_token 是： " + keycloakSecurityContext.getIdTokenString() + " ；你的 access_token 是： " + keycloakSecurityContext.getTokenString();
     }
 
     @RequestMapping(value = "/api/test", method = RequestMethod.GET)
