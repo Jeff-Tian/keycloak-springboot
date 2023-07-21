@@ -14,6 +14,14 @@
 
 - https://tranquil-plains-58233.herokuapp.com/visitor
 
+### 受保护的页（API），经过 Keycloak 登录后，可以将 token 传递给其他页面（不推荐）
+
+- https://tranquil-plains-58233.herokuapp.com/visitor?returnUrl=http://www.baidu.com  这是一个例子，通过传递一个 returnUrl，访问该 API 会被要求登录。登录完成后，token 信息会被重定向传给 returnUrl （比如 http://www.baidu.com ）。你可以传递给自己的前端站点，并接收 token 信息保存，以便后续向 API 发送请求时带上它。推荐参考后面列出的专栏来解决前后端分离的项目中，如何保护 API 的做法，本接口示例仅演示另一种可能性。
+
+https://github.com/Jeff-Tian/keycloak-springboot/assets/3367820/f70162f5-fc00-4708-89a6-ff9023e0846d
+
+
+
 ## 本地开发
 
 ### Mac OSX:
@@ -61,7 +69,7 @@ JAVA_HOME=/usr/local/opt/openjdk mvn clean install
 
 ```
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project keycloak-springboot: Compilation failure
-[ERROR] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?
+[ERROR] No compiler is provided in this environment. Are you running on a JRE rather than a JDK?
 ```
 
 **Solution**
@@ -131,3 +139,15 @@ Admin 的用户名和密码。它们不能明文放在代码里，因此采用�
 
 - [Free Arch: 如何在 Spring Boot 应用中集成 Keycloak？ - Jeff Tian的文章 - 知乎](  https://zhuanlan.zhihu.com/p/480816990)
 - [使用 Keycloak 接管 SpringBoot 应用的用户认证功能 - Jeff Tian的文章 - 知乎](  https://zhuanlan.zhihu.com/p/587831808)
+- [使用 IdentityServer 保护 Web 应用（AntD Pro 前端 + SpringBoot 后端） - Jeff Tian的文章 - 知乎](https://zhuanlan.zhihu.com/p/533197284)
+- [升级 spring-security-oauth2 到 spring-boot-starter-oauth2-resource-server - Jeff Tian的文章 - 知乎](https://zhuanlan.zhihu.com/p/623303771)
+
+## 💵 了解更多
+
+欢迎来知乎向我[咨询](https://www.zhihu.com/consult/people/1073548674713423872)！
+
+<a href="https://www.zhihu.com/consult/people/1073548674713423872" target="blank"><img src="https://first-go-vercel.vercel.app/api/dynamicimage" alt="向我咨询"/></a>
+
+## ✨ Star 历史
+
+![https://api.star-history.com/svg?repos=jeff-tian/keycloak-springboot&type=Date](https://api.star-history.com/svg?repos=jeff-tian/keycloak-springboot&type=Date "Star History")
