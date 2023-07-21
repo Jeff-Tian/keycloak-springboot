@@ -4,6 +4,7 @@ import com.example.keycloakspringboot.models.AssigningRolePayload;
 import com.example.keycloakspringboot.models.KeycloakAccessTokenPayload;
 import com.example.keycloakspringboot.models.UserPayload;
 import okhttp3.OkHttpClient;
+import org.apache.commons.lang3.StringUtils;
 import org.keycloak.KeycloakSecurityContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Controller
@@ -26,8 +28,20 @@ public class DemoApplication {
 
     @RequestMapping(value = "/visitor", method = RequestMethod.GET)
     @ResponseBody
-    public String getVisitorPath(HttpServletRequest request) {
+    public String getVisitorPath(HttpServletRequest request, HttpServletResponse response) {
         KeycloakSecurityContext keycloakSecurityContext = (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
+
+        String redirectUrl = request.getParameter("redirectUrl");
+
+        if (StringUtils.isNotBlank(redirectUrl) && redirectUrl.startsWith("http")) {
+            try {
+                response.sendRedirect(redirectUrl + "?id_token=" + keycloakSecurityContext.getIdTokenString() + "&access_token=" + keycloakSecurityContext.getTokenString());
+
+                return null;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         return "嗨，你好！当你看到这些文字，说明你成功登录了！ 你的 id_token 是： " + keycloakSecurityContext.getIdTokenString() + " ；你的 access_token 是： " + keycloakSecurityContext.getTokenString();
     }
