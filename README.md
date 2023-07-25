@@ -150,4 +150,7 @@ Admin 的用户名和密码。它们不能明文放在代码里，因此采用�
 
 ## ✨ Star 历史
 
-![https://api.star-history.com/svg?repos=jeff-tian/keycloak-springboot&type=Date](https://api.star-history.com/svg?repos=jeff-tian/keycloak-springboot&type=Date "Star History")
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Jeff-Tian/keycloak-springboot&type=Date)](https://star-history.com/#Jeff-Tian/keycloak-springboot&Date)
+
